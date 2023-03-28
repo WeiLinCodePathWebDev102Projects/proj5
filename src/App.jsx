@@ -103,7 +103,6 @@ function App() {
 
   return (
     <div>
-      hello
       <div className='title'>
         <h1> Brewery</h1>
       </div>
