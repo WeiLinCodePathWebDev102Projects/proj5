@@ -6,5 +6,11 @@
   color: black;
 }
 
+.breweryTag{
+  background-color: antiquewhite;
+  padding: 2%;
+  margin: 3%;
+  border-radius: 20px;
+}
 
 
