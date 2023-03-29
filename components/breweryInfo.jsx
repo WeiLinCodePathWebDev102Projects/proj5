@@ -1,16 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const BreweryInfo = ({name, address, city, postal_code, website}) => {
+
+const BreweryInfo = ({name, id}) => {
 
     return(
         <div className="breweryTag">
-            <h5>
-                {name}
-            </h5>
-            {address} <br></br>
-            {city}, {postal_code}
-            <br></br>
-            <a href={website}> Link to Website </a>
+            <Link
+                to={`brewery/${id}`} 
+                key={name}>
+                <h5>
+                    {name}
+                </h5>
+            </Link>
         </div>
     );
 

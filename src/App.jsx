@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import BreweryInfo from '../components/breweryInfo';
 import './App.css'
+import { ResponsiveContainer, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+
 
 function App() {
   const [breweryList, setBreweyList] = useState(0);
@@ -44,6 +46,7 @@ function App() {
     const response = await fetch(brewerApi);
     const json = await response.json();
     setBreweyList(json);
+    console.log(breweryList)
   };
 
   const searchBrewery = searchValue =>{
@@ -100,6 +103,14 @@ function App() {
   const dataSize = filteredResults.length ? filteredResults.length : breweryList.length;
   console.log(dataSize);
 
+  const data = [
+    {label: 'Micro', number: 79},
+    {label: 'Contract', number: 4},
+    {label: 'Planning', number: 14},
+    {label: 'Brewpub', number: 18},
+
+  ]
+
 
   return (
     <div>
@@ -113,6 +124,24 @@ function App() {
         Number of Breweries with Contract Brewery: 4 <br></br>
         Number of Breweries with Planning Brewery: 14 <br></br>
         Number of Breweries with Brewpub Brewery: 18
+      </div>
+
+      <div>
+        <h3>
+          Bar Chart
+        </h3>
+        <div className='graph'>
+            <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+              <XAxis dataKey="label" />
+              <YAxis />
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <Tooltip />
+              <Legend/>
+              <Bar dataKey="number" fill="#FB8833" />
+            </BarChart>
+            </ResponsiveContainer>
+        </div>
       </div>
       <div>
         <input type="test" 
@@ -151,19 +180,13 @@ function App() {
             filteredResults && filteredResults.map(brewery =>
               <BreweryInfo 
                 name={brewery.name}
-                address={brewery.address_1}
-                city={brewery.city}
-                postal_code={brewery.postal_code}
-                website={brewery.website_url}
+                id ={brewery.id}
                 />)
 
             : breweryList && breweryList.map(brewery =>
               <BreweryInfo 
                 name={brewery.name}
-                address={brewery.address_1}
-                city={brewery.city}
-                postal_code={brewery.postal_code}
-                website={brewery.website_url}
+                id = {brewery.id}
                 />
             )
           }
